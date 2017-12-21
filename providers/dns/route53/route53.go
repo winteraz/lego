@@ -92,7 +92,7 @@ func (r *DNSProvider) CleanUp(domain, token, keyAuth string) error {
 	return r.changeRecord("DELETE", fqdn, value, route53TTL)
 }
 
-func (r *DNSProvider) changeRecord(action, fqdn, value string, ttl int) error {
+func (r *DNSProvider) ChangeRecord(action, fqdn, value string, ttl int) error {
 	hostedZoneID, err := r.getHostedZoneID(fqdn)
 	if err != nil {
 		return fmt.Errorf("Failed to determine Route 53 hosted zone ID: %v", err)
