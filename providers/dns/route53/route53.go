@@ -82,14 +82,14 @@ func NewDNSProvider() (*DNSProvider, error) {
 func (r *DNSProvider) Present(domain, token, keyAuth string) error {
 	fqdn, value, _ := acme.DNS01Record(domain, keyAuth)
 	value = `"` + value + `"`
-	return r.changeRecord("UPSERT", fqdn, value, route53TTL)
+	return r.ChangeRecord("UPSERT", fqdn, value, route53TTL)
 }
 
 // CleanUp removes the TXT record matching the specified parameters
 func (r *DNSProvider) CleanUp(domain, token, keyAuth string) error {
 	fqdn, value, _ := acme.DNS01Record(domain, keyAuth)
 	value = `"` + value + `"`
-	return r.changeRecord("DELETE", fqdn, value, route53TTL)
+	return r.ChangeRecord("DELETE", fqdn, value, route53TTL)
 }
 
 func (r *DNSProvider) ChangeRecord(action, fqdn, value string, ttl int) error {
